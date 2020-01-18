@@ -1,7 +1,7 @@
 # Spaceless filenamer
 
 Sniff through specified directory and rename the files to no longer
-have hyphens or spaces.
+have spaces.
 
 ## Usage
 
