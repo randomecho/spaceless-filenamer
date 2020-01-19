@@ -18,7 +18,6 @@ def rename_dateformat(filename):
 
     if re.match(date_pattern, filename):
         filename = re.sub(date_pattern, "\\1\\2\\3\\4", filename)
-        print(filename)
 
     return filename
 
