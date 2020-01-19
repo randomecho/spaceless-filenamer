@@ -7,7 +7,20 @@ parser = ArgumentParser()
 parser.add_argument("-i", "--input", dest="input_dir",
     required=True,
     help="/path/to/directory")
+parser.add_argument("-d", "--date", dest="reformat_date",
+    default=False,
+    help="/path/to/directory")
 args = parser.parse_args()
+
+
+def rename_dateformat(filename):
+    date_pattern = "^([0-9]{4})-([0-9]{2})-([0-9]{2})(.*)"
+
+    if re.match(date_pattern, filename):
+        filename = re.sub(date_pattern, "\\1\\2\\3\\4", filename)
+        print(filename)
+
+    return filename
 
 
 def rename_without_junk(filename):
@@ -24,6 +37,10 @@ try:
 
     for filename in os.listdir(args.input_dir):
         clean_filename = rename_without_junk(filename)
+
+        if args.reformat_date:
+            clean_filename = rename_dateformat(clean_filename)
+
         clean_filepath = args.input_dir + clean_filename
 
         if filename == clean_filename:
